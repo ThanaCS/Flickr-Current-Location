@@ -26,15 +26,13 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
         getLastLocation()
         getNewLocation()
-
     }
-
     private fun getLastLocation() {
         if (checkPermission()) {
             if (isLocationEnabled()) {
 
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-                    var location: Location? = task.result
+                    val location: Location? = task.result
                     if (location == null) {
 
                     } else {
@@ -83,7 +81,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
         if (requestCode == PERMISSION_ID) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("Debug", "You have the premission")
+                Log.d("Debug", "You have the permission")
             }
         }
     }
