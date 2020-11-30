@@ -8,25 +8,78 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 private var PERMISSION_ID = 1 //any unique number
-var lat: Double = 0.0
-var long: Double = 0.0
+var lat: Double = 24.9
+var long: Double = 46.9
+private var TAG = "LocationFragment"
 
 class LocationFragment : Fragment(R.layout.fragment_location) {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         getLastLocation()
         getNewLocation()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val photoList: RecyclerView = requireView().findViewById(R.id.photo_list)
+
+        val client = OkHttpClient.Builder()
+                .addInterceptor(PhotoInterceptor())
+                .build()
+
+        val retrofit: FlickrApi = Retrofit.Builder()
+                .baseUrl("https://api.flickr.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)// Interceptor
+                .build().create(FlickrApi::class.java)
+
+
+        GlobalScope.launch {
+
+            val response = retrofit.searchPhotos(lat.toString(), long.toString())
+
+            if (response.isSuccessful) {
+                if (response.body() != null) {
+                    val data = response.body()?.results
+                    withContext(Dispatchers.Main) {
+                        Log.d(TAG, "Data: $data ")
+                        photoList.layoutManager = GridLayoutManager(context, 3)
+
+                        if (data != null) {
+                            photoList.adapter = PhotoAdapter(data)
+                        }
+
+                    }
+                }
+
+            }
+
+
+        }
+    }
+
     private fun getLastLocation() {
         if (checkPermission()) {
             if (isLocationEnabled()) {
@@ -36,9 +89,10 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                     if (location == null) {
 
                     } else {
-                        Toast.makeText(requireActivity(), "lat: ${location.latitude} long ${location.longitude} ", Toast.LENGTH_SHORT).show()
                         lat = location.latitude
                         long = location.longitude
+                        Toast.makeText(requireActivity(), "lat: ${location.latitude} long ${location.longitude} ", Toast.LENGTH_SHORT).show()
+
                     }
                 }
             } else {

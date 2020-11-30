@@ -1,5 +1,6 @@
 package com.thanaa.flickrcurrentlocation
 
+import android.util.Log
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -14,8 +15,6 @@ class PhotoInterceptor : Interceptor {
         //originalRequest.url() pulls the original URL from the request
         val newUrl: HttpUrl = originalRequest.url().newBuilder()
                 .addQueryParameter("api_key", API_KEY)
-                .addQueryParameter("lat", "lat")
-                .addQueryParameter("lon", "lon")
                 .addQueryParameter("format", "json")
                 .addQueryParameter("nojsoncallback", "1")
                 .build()
@@ -24,6 +23,8 @@ class PhotoInterceptor : Interceptor {
         val newRequest: Request = originalRequest.newBuilder()
                 .url(newUrl)
                 .build()
+
+        Log.d("foo", "$newRequest")
 //Finally, you call chain.proceed(newRequest) to produce a Response.
 // If you did not call chain.proceed(...), the network request would not happen.
         return chain.proceed(newRequest)

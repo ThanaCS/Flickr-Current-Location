@@ -1,19 +1,18 @@
 package com.thanaa.flickrcurrentlocation
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class PhotoAdapter(private val photos: List<GalleryItem>) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
 
-
+    var TAG = "PhotoAdapter"
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.image_view)
-        val itemlat: TextView = view.findViewById(R.id.lat_text)
-        val itemlong: TextView = view.findViewById(R.id.long_text)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,6 +24,9 @@ class PhotoAdapter(private val photos: List<GalleryItem>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val photoItem = photos[position]
+        val url = "https://live.staticflickr.com/${photoItem.server}/${photoItem.id}_${photoItem.secret}.jpg"
+        Log.d(TAG, "$url")
+        Glide.with(holder.itemImage).load(url).into(holder.itemImage)
 
     }
 
