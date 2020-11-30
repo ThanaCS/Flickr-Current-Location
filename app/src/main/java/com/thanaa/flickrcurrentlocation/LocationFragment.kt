@@ -8,9 +8,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -26,25 +24,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private var PERMISSION_ID = 1 //any unique number
-var lat: Double = 24.9
-var long: Double = 46.9
+var lat: Double = 24.8539523
+var long: Double = 46.7133915
 private var TAG = "LocationFragment"
 
 class LocationFragment : Fragment(R.layout.fragment_location) {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         getLastLocation()
         getNewLocation()
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         val photoList: RecyclerView = requireView().findViewById(R.id.photo_list)
-
         val client = OkHttpClient.Builder()
                 .addInterceptor(PhotoInterceptor())
                 .build()
@@ -62,7 +55,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
-                    val data = response.body()?.results
+                    val data = response.body()?.photos?.photo
                     withContext(Dispatchers.Main) {
                         Log.d(TAG, "Data: $data ")
                         photoList.layoutManager = GridLayoutManager(context, 3)
@@ -156,8 +149,8 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             val lastLocation = p0!!.lastLocation
             lat = lastLocation.latitude
             long = lastLocation.longitude
-            Toast.makeText(requireActivity(), "lat: ${lastLocation.latitude} long ${lastLocation.longitude} ", Toast.LENGTH_SHORT).show()
-
+            // Toast.makeText(requireActivity(), "lat: ${lastLocation.latitude} long ${lastLocation.longitude} ", Toast.LENGTH_SHORT).show()
+            Log.d("LocationFragment", "lat: ${lastLocation.latitude} long ${lastLocation.longitude} ")
         }
     }
 

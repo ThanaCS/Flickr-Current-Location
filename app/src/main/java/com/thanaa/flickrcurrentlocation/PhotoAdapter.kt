@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
-class PhotoAdapter(private val photos: List<GalleryItem>) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
+class PhotoAdapter(private val photos: List<Photo>) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
 
     var TAG = "PhotoAdapter"
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.image_view)
     }
@@ -25,8 +27,9 @@ class PhotoAdapter(private val photos: List<GalleryItem>) : RecyclerView.Adapter
 
         val photoItem = photos[position]
         val url = "https://live.staticflickr.com/${photoItem.server}/${photoItem.id}_${photoItem.secret}.jpg"
-        Log.d(TAG, "$url")
-        Glide.with(holder.itemImage).load(url).into(holder.itemImage)
+        Log.d(TAG, "url")
+        Glide.with(holder.itemImage).load(url).apply(RequestOptions().override(500, 500))
+                .centerCrop().into(holder.itemImage)
 
     }
 
