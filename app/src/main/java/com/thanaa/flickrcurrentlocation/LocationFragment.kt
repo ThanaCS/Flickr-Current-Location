@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 
 
@@ -21,7 +20,6 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
     lateinit var viewModel: FlickrViewModel
     lateinit var fusedLocationClient: FusedLocationProviderClient
-    lateinit var locationRequest: LocationRequest
     lateinit var photoList: RecyclerView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,7 +44,6 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                 viewModel.getPhotos(it.latitude.toString(), it.longitude.toString())
             }
         }
-
         fetchData()
     }
 
