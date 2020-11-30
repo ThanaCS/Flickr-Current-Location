@@ -9,5 +9,18 @@
         android:id="@+id/locationFragment"
         android:name="com.thanaa.flickrcurrentlocation.LocationFragment"
         android:label="fragment_location"
-        tools:layout="@layout/fragment_location" />
+        tools:layout="@layout/fragment_location">
+        <action
+            android:id="@+id/action_locationFragment_to_displayFragment"
+            app:destination="@id/displayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayFragment"
+        android:name="com.thanaa.flickrcurrentlocation.DisplayFragment"
+        android:label="fragment_display"
+        tools:layout="@layout/fragment_display">
+        <action
+            android:id="@+id/action_displayFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
 </navigation>
