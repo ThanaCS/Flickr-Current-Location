@@ -11,9 +11,9 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_display.*
 
 
-class DisplayFragment(var photos: Photo, var url: String) : DialogFragment() {
+class DisplayFragment(var photos: Photo) : DialogFragment() {
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_display, container, false)
 

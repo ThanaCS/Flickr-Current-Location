@@ -42,16 +42,27 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         fusedLocationClient.lastLocation.addOnSuccessListener {
             if (it != null) {
                 viewModel.getPhotos(it.latitude.toString(), it.longitude.toString())
+
             }
         }
+
+
         fetchData()
     }
 
     private fun fetchData() {
         photoList = requireView().findViewById(R.id.photo_list)
+
         viewModel.photosLiveData.observe(viewLifecycleOwner, {
             photoList.layoutManager = GridLayoutManager(requireContext(), 3)
             photoList.adapter = PhotoAdapter(it)
+
+            showPreview(it)
         })
+    }
+
+    private fun showPreview(photo: List<Photo>) {
+        //Todo:preview of a ThumbNail
+
     }
 }

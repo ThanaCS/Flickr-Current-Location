@@ -10,5 +10,8 @@ interface FlickrApi {
     suspend fun searchPhotos(@Query("lat") lat: String? = null,
                              @Query("lon") lon: String? = null): Response<FlickrResponse>
 
+    @GET("flickr.photos.geo.getLocation")
+    suspend fun getGeoLocation(@Query("api_key") api: String? = null,
+                               @Query("photo_id") id: String? = null): Response<FlickrResponse>
 
 }
