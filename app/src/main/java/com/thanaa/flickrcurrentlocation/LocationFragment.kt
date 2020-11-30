@@ -1,6 +1,5 @@
 package com.thanaa.flickrcurrentlocation
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -23,20 +22,28 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private var PERMISSION_ID = 1 //any unique number
-var lat: Double = 24.8539523
-var long: Double = 46.7133915
+
 private var TAG = "LocationFragment"
+var lat: String = "0"
+var long: String = "0"
+var PERMISSION_ID: Int = 1
 
 class LocationFragment : Fragment(R.layout.fragment_location) {
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     lateinit var locationRequest: LocationRequest
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        getNewLocation()
+        getLastLocation()
+        getNewLocation()
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        getLastLocation()
-        getNewLocation()
+
         val photoList: RecyclerView = requireView().findViewById(R.id.photo_list)
         val client = OkHttpClient.Builder()
                 .addInterceptor(PhotoInterceptor())
@@ -49,9 +56,10 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
                 .build().create(FlickrApi::class.java)
 
 
+
         GlobalScope.launch {
 
-            val response = retrofit.searchPhotos(lat.toString(), long.toString())
+            val response = retrofit.searchPhotos(lat, long)
 
             if (response.isSuccessful) {
                 if (response.body() != null) {
@@ -72,20 +80,19 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
         }
     }
-
     private fun getLastLocation() {
+        getNewLocation()
         if (checkPermission()) {
             if (isLocationEnabled()) {
 
                 fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
-                    val location: Location? = task.result
+                    var location: Location? = task.result
                     if (location == null) {
 
                     } else {
-                        lat = location.latitude
-                        long = location.longitude
                         Toast.makeText(requireActivity(), "lat: ${location.latitude} long ${location.longitude} ", Toast.LENGTH_SHORT).show()
-
+                        lat = location.latitude.toString()
+                        long = location.longitude.toString()
                     }
                 }
             } else {
@@ -125,33 +132,36 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         //checks permission result
-
         if (requestCode == PERMISSION_ID) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("Debug", "You have the permission")
+                Log.d("Debug", "You have the premission")
             }
         }
     }
 
-    @SuppressLint("MissingPermission")
+
     private fun getNewLocation() {
         locationRequest = LocationRequest()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = 0
         locationRequest.fastestInterval = 0
         locationRequest.numUpdates = 2
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+        if (ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+            return
+        }
 
     }
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(p0: LocationResult?) {
             val lastLocation = p0!!.lastLocation
-            lat = lastLocation.latitude
-            long = lastLocation.longitude
-            // Toast.makeText(requireActivity(), "lat: ${lastLocation.latitude} long ${lastLocation.longitude} ", Toast.LENGTH_SHORT).show()
-            Log.d("LocationFragment", "lat: ${lastLocation.latitude} long ${lastLocation.longitude} ")
+            lat = lastLocation.latitude.toString()
+            long = lastLocation.longitude.toString()
+            Toast.makeText(requireActivity(), "lat: ${lastLocation.latitude} long ${lastLocation.longitude} ", Toast.LENGTH_SHORT).show()
+
         }
     }
+
 
 }
