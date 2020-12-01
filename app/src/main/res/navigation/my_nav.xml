@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapsFragment2"
-        android:name="com.thanaa.flickrcurrentlocation.MapsFragment"
+        android:name="com.thanaa.flickrcurrentlocation.ui.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">
         <action

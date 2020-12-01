@@ -1,4 +1,4 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.thanaa.flickrcurrentlocation.R
 
 class MapsFragment : Fragment() {
     private val args by navArgs<MapsFragmentArgs>()
