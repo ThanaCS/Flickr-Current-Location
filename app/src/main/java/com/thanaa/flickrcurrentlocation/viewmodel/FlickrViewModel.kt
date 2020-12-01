@@ -1,6 +1,5 @@
 package com.thanaa.flickrcurrentlocation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,13 +26,14 @@ class FlickrViewModel : ViewModel() {
             .client(client)// Interceptor
             .build().create(FlickrApi::class.java)
 
+    // get photos near current location
     fun getPhotos(lat: String, lon: String) = viewModelScope.launch {
         val response = retrofit.searchPhotos(lat, lon)
         if (response.isSuccessful)
             photosLiveData.postValue(response.body()?.photos?.photo)
-        Log.d("FOO", "${photosLiveData.value}")
     }
 
+    //get location of the photo
     fun getGeoLocation(id: String) = viewModelScope.launch {
         val response = retrofit.getGeoLocation(id)
         if (response.isSuccessful)

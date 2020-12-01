@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_displayFragment_to_mapsFragment22"
             app:destination="@id/mapsFragment2" />
+        <argument
+            android:name="photo"
+            app:argType="com.thanaa.flickrcurrentlocation.model.Photo" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment2"

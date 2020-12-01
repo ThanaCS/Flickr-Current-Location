@@ -15,7 +15,6 @@ import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
 
 
 private var TAG = "LocationFragment"
-
 var PERMISSION_ID: Int = 1
 
 class LocationFragment : Fragment(R.layout.fragment_location) {
@@ -43,15 +42,12 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
         fusedLocationClient.lastLocation.addOnSuccessListener {
             if (it != null) {
-
                 viewModel.getPhotos(it.latitude.toString(), it.longitude.toString())
-
             }
         }
 
         fetchData()
     }
-
     private fun fetchData() {
         photoList = requireView().findViewById(R.id.photo_list)
         viewModel.photosLiveData.observe(viewLifecycleOwner, {
