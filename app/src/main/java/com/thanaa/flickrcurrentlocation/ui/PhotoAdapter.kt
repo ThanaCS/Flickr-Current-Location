@@ -55,10 +55,14 @@ class PhotoAdapter(private val photos: List<Photo>) : RecyclerView.Adapter<Photo
             builder?.setMessage("$title\n$country\n$region\n$accuracy\n$locality ")
             builder?.apply {
                 setPositiveButton("Show more",
-                        DialogInterface.OnClickListener { dialog, id ->
-                            val action = LocationFragmentDirections.actionLocationFragmentToDisplayFragment(viewModel.locationLiveData.value!!, url)
-                            holder.itemView.image_view.findNavController().navigate(action)
-                        })
+                    DialogInterface.OnClickListener { dialog, id ->
+                        val action =
+                            LocationFragmentDirections.actionLocationFragmentToDisplayFragment(
+                                viewModel.locationLiveData.value!!,
+                                url
+                            )
+                        holder.itemView.image_view.findNavController().navigate(action)
+                    })
 
                 val dialog: AlertDialog? = builder.create()
                 dialog?.show()

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -12,11 +13,13 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MapsFragment : Fragment() {
+    private val args by navArgs<MapsFragmentArgs>()
 
     private val callback = OnMapReadyCallback { googleMap ->
-
-        val place = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(place).title("Marker in Sydney"))
+        val place = LatLng(args.location.latitude.toDouble(), args.location.longitude.toDouble())
+        googleMap.addMarker(
+            MarkerOptions().position(place).title("Marker in ${args.location.region._content}")
+        )
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place))
     }
 

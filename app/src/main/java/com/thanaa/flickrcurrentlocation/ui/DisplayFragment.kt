@@ -29,7 +29,8 @@ class DisplayFragment : Fragment() {
 
         resizeImage(args.url)
         location_text.setOnClickListener {
-            val action = DisplayFragmentDirections.actionDisplayFragmentToMapsFragment22()
+            val action =
+                DisplayFragmentDirections.actionDisplayFragmentToMapsFragment22(args.location)
             findNavController().navigate(action)
         }
     }

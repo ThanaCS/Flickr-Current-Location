@@ -43,6 +43,7 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 
         fusedLocationClient.lastLocation.addOnSuccessListener {
             if (it != null) {
+
                 viewModel.getPhotos(it.latitude.toString(), it.longitude.toString())
 
             }
