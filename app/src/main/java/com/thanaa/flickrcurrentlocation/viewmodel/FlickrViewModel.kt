@@ -1,10 +1,13 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thanaa.flickrcurrentlocation.api.FlickrApi
+import com.thanaa.flickrcurrentlocation.api.PhotoInterceptor
 import com.thanaa.flickrcurrentlocation.model.Location
+import com.thanaa.flickrcurrentlocation.model.Photo
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

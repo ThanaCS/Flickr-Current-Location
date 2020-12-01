@@ -1,4 +1,4 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.model
 
 data class Photos(
         val page: Int,

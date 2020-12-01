@@ -1,6 +1,14 @@
 package com.thanaa.flickrcurrentlocation.model
 
 data class Photo(
+        val farm: Int,
         val id: String,
-        val location: Location
+        val isfamily: Int,
+        val isfriend: Int,
+        val ispublic: Int,
+        val owner: String,
+        val secret: String,
+        val server: String,
+        val title: String
+
 )

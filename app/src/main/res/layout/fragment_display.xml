@@ -4,10 +4,10 @@
     android:id="@+id/display_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayFragment">
+    tools:context=".ui.DisplayFragment">
 
-<ImageView
-    android:id="@+id/img_preview"
-    android:layout_width="150dp"
-    android:layout_height="150dp" />
+    <ImageView
+        android:id="@+id/img_preview"
+        android:layout_width="150dp"
+        android:layout_height="150dp" />
 </FrameLayout>

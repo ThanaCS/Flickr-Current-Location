@@ -1,4 +1,4 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.ui
 
 import android.app.AlertDialog
 import android.util.Log
@@ -9,6 +9,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.thanaa.flickrcurrentlocation.R
+import com.thanaa.flickrcurrentlocation.model.Photo
+import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
 import kotlinx.android.synthetic.main.row_item.view.*
 
 class PhotoAdapter(private val photos: List<Photo>) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {

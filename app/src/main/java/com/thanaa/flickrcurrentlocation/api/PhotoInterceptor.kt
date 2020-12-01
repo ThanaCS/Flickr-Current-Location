@@ -1,4 +1,4 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.api
 
 import okhttp3.HttpUrl
 import okhttp3.Interceptor

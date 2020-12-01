@@ -1,4 +1,4 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.ui
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.thanaa.flickrcurrentlocation.R
+import com.thanaa.flickrcurrentlocation.model.Photo
+import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
 
 
 private var TAG = "LocationFragment"

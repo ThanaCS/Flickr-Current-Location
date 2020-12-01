@@ -1,5 +1,6 @@
-package com.thanaa.flickrcurrentlocation
+package com.thanaa.flickrcurrentlocation.api
 
+import com.thanaa.flickrcurrentlocation.model.FlickrResponse
 import com.thanaa.flickrcurrentlocation.model.LocationResponse
 import retrofit2.Response
 import retrofit2.http.GET
