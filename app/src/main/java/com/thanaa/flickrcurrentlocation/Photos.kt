@@ -5,5 +5,5 @@ data class Photos(
         val pages: Int,
         val perpage: Int,
         val photo: List<Photo>,
-        val total: String
+        val total: String,
 )

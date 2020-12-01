@@ -46,18 +46,15 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             }
         }
 
-
         fetchData()
     }
 
     private fun fetchData() {
         photoList = requireView().findViewById(R.id.photo_list)
-
         viewModel.photosLiveData.observe(viewLifecycleOwner, {
             photoList.layoutManager = GridLayoutManager(requireContext(), 3)
             photoList.adapter = PhotoAdapter(it)
 
-            showPreview(it)
         })
     }
 

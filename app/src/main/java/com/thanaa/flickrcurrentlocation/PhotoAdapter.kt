@@ -12,9 +12,8 @@ import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.row_item.view.*
 
 class PhotoAdapter(private val photos: List<Photo>) : RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
-
+    lateinit var viewModel: FlickrViewModel
     var TAG = "PhotoAdapter"
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.image_view)
     }
@@ -26,18 +25,26 @@ class PhotoAdapter(private val photos: List<Photo>) : RecyclerView.Adapter<Photo
     override fun getItemCount() = photos.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        viewModel = FlickrViewModel()
         val photoItem = photos[position]
+        viewModel.getGeoLocation(photoItem.id)
+
         val url = "https://live.staticflickr.com/${photoItem.server}/${photoItem.id}_${photoItem.secret}.jpg"
         Log.d(TAG, "url")
         Glide.with(holder.itemImage).load(url).apply(RequestOptions().override(500, 500))
                 .centerCrop().into(holder.itemImage)
 
+
         holder.itemView.image_view.setOnClickListener { view ->
+
             val builder: AlertDialog.Builder? = view.context?.let {
                 AlertDialog.Builder(it)
             }
-            builder?.setMessage(photos[position].title)
+            val country = viewModel.locationLiveData.value?.country?._content ?: ""
+            val region = viewModel.locationLiveData.value?.region?._content ?: ""
+            val accuracy = viewModel.locationLiveData.value?.accuracy ?: ""
+            val locality = viewModel.locationLiveData.value?.locality?._content ?: ""
+            builder?.setMessage("${photoItem.title} ${country}\n ${region}\n ${accuracy} \n${locality} ")
             val dialog: AlertDialog? = builder?.create()
             dialog?.show()
         }

@@ -1,12 +1,11 @@
 package com.thanaa.flickrcurrentlocation
 
-import android.util.Log
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 
- const val API_KEY = "343c1eb57437c1562e3aa3431269a9ae"
+const val API_KEY = "343c1eb57437c1562e3aa3431269a9ae"
 
 class PhotoInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -24,7 +23,7 @@ class PhotoInterceptor : Interceptor {
                 .url(newUrl)
                 .build()
 
-        Log.d("foo", "$newRequest")
+
 //Finally, you call chain.proceed(newRequest) to produce a Response.
 // If you did not call chain.proceed(...), the network request would not happen.
         return chain.proceed(newRequest)

@@ -1,22 +1,23 @@
 package com.thanaa.flickrcurrentlocation
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.thanaa.flickrcurrentlocation.model.Location
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private val BASE_URL = "https://api.flickr.com/"
+private const val BASE_URL = "https://api.flickr.com/"
 class FlickrViewModel : ViewModel() {
 
     val photosLiveData: MutableLiveData<List<Photo>> = MutableLiveData()
-
+    val locationLiveData: MutableLiveData<Location> = MutableLiveData()
     private val client = OkHttpClient.Builder()
             .addInterceptor(PhotoInterceptor())
             .build()
-
     private val retrofit: FlickrApi = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -27,11 +28,12 @@ class FlickrViewModel : ViewModel() {
         val response = retrofit.searchPhotos(lat, lon)
         if (response.isSuccessful)
             photosLiveData.postValue(response.body()?.photos?.photo)
+        Log.d("FOO", "${photosLiveData.value}")
     }
 
-    fun getGeoLocation(api: String, id: String) = viewModelScope.launch {
-        val response = retrofit.getGeoLocation(api, id)
+    fun getGeoLocation(id: String) = viewModelScope.launch {
+        val response = retrofit.getGeoLocation(id)
         if (response.isSuccessful)
-            photosLiveData.postValue(response.body()?.photos?.photo)
+            locationLiveData.postValue(response.body()?.photo?.location)
     }
 }
