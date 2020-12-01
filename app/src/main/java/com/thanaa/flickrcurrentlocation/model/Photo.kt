@@ -1,5 +1,9 @@
 package com.thanaa.flickrcurrentlocation.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Photo(
         val farm: Int,
         val id: String,
@@ -11,4 +15,4 @@ data class Photo(
         val server: String,
         val title: String
 
-)
+) : Parcelable

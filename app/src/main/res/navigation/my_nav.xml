@@ -22,5 +22,11 @@
         <action
             android:id="@+id/action_displayFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <argument
+            android:name="location"
+            app:argType="com.thanaa.flickrcurrentlocation.model.Location" />
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 </navigation>

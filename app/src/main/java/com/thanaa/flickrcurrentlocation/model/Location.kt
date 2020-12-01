@@ -1,5 +1,9 @@
 package com.thanaa.flickrcurrentlocation.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Location(
         val accuracy: String,
         val context: String,
@@ -7,4 +11,4 @@ data class Location(
         val latitude: String,
         val locality: Locality,
         val longitude: String,
-        val region: Region)
+        val region: Region) : Parcelable

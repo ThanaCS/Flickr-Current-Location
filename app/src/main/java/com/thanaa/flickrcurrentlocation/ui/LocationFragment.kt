@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.thanaa.flickrcurrentlocation.R
-import com.thanaa.flickrcurrentlocation.model.Photo
 import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
 
 
@@ -61,8 +60,5 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         })
     }
 
-    private fun showPreview(photo: List<Photo>) {
-        //Todo:preview of a ThumbNail
 
-    }
 }
