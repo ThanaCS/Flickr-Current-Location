@@ -39,17 +39,17 @@ class PhotoAdapter(private val photos: List<Photo>) :
 
 
         val url = toUrl(photoItem.server, photoItem.id, photoItem.secret)
-        Glide.with(holder.itemImage).load(url).apply(RequestOptions().override(500, 500))
+        Glide.with(holder.itemImage).load(url).apply(RequestOptions().override(1024, 1024))
             .centerCrop().into(holder.itemImage)
 
         holder.itemView.image_view.setOnClickListener { view ->
-            val action =
-                LocationFragmentDirections.actionLocationFragmentToDisplayFragment(
+            if (viewModel.locationLiveData.value != null) {
+                val action = LocationFragmentDirections.actionLocationFragmentToDisplayFragment(
                     viewModel.locationLiveData.value!!,
                     url, photoItem
                 )
-            holder.itemView.image_view.findNavController().navigate(action)
-
+                holder.itemView.image_view.findNavController().navigate(action)
+            }
 
         }
     }
