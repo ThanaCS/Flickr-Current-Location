@@ -37,17 +37,17 @@ class DisplayFragment : Fragment() {
         countryText.text = args.location.country._content
         regionText.text = "${args.location.region._content}, "
 
-        setHasOptionsMenu(true)
-        resizeImage(args.url)
+
+        loadImage(args.url)
         location_box.setOnClickListener {
 
-        val action =
+            val action =
                 DisplayFragmentDirections.actionDisplayFragmentToMapsFragment22(args.location)
             findNavController().navigate(action)
         }
     }
 
-    private fun resizeImage(url: String) {
+    private fun loadImage(url: String) {
         Glide.with(this)
             .load(url)
             .apply(RequestOptions().override(900, 1024))

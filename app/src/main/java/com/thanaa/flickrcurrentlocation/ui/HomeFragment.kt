@@ -35,6 +35,7 @@ class LocationFragment : Fragment(R.layout.home_location) {
 
         progressBar = requireView().findViewById(R.id.images_progress_bar)
         photoListRecyclerView = requireView().findViewById(R.id.photo_list)
+
         getUserLocation()
         getData()
     }
@@ -42,7 +43,6 @@ class LocationFragment : Fragment(R.layout.home_location) {
     private fun getData() {
         if (count == 0) {
             count++
-
             progressBar.visibility = View.VISIBLE
             viewModel.photosLiveData.observe(viewLifecycleOwner, {
                 photoListRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
@@ -51,9 +51,10 @@ class LocationFragment : Fragment(R.layout.home_location) {
                 photosList.addAll(it)
                 photoListRecyclerView.visibility = View.VISIBLE
             })
+        } else {
+            photoListRecyclerView.adapter = PhotoAdapter(photosList)
+            photoListRecyclerView.visibility = View.VISIBLE
         }
-        photoListRecyclerView.adapter = PhotoAdapter(photosList)
-        photoListRecyclerView.visibility = View.VISIBLE
     }
 
     private fun getUserLocation() {

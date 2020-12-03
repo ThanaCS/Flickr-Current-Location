@@ -19,7 +19,7 @@ class MapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         val place = LatLng(args.location.latitude.toDouble(), args.location.longitude.toDouble())
         googleMap.addMarker(
-            MarkerOptions().position(place).title("Marker in ${args.location.region._content}")
+            MarkerOptions().position(place).title(args.location.region._content)
         )
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place))
