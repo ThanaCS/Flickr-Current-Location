@@ -37,7 +37,7 @@ class DisplayFragment : Fragment() {
         countryText.text = args.location.country._content
         regionText.text = "${args.location.region._content}, "
 
-
+        setHasOptionsMenu(true)
         resizeImage(args.url)
         location_box.setOnClickListener {
 

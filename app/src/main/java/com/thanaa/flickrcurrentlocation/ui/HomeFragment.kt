@@ -6,7 +6,7 @@ import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -17,11 +17,12 @@ import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
 private var TAG = "LocationFragment"
 var PERMISSION_ID: Int = 1
 
-class LocationFragment : Fragment(R.layout.fragment_location) {
+class LocationFragment : Fragment(R.layout.home_location) {
 
     lateinit var viewModel: FlickrViewModel
     lateinit var fusedLocationClient: FusedLocationProviderClient
     lateinit var photoList: RecyclerView
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,14 +47,14 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
             }
         }
 
+
         fetchData()
     }
     private fun fetchData() {
         photoList = requireView().findViewById(R.id.photo_list)
         viewModel.photosLiveData.observe(viewLifecycleOwner, {
-            photoList.layoutManager = GridLayoutManager(requireContext(), 3)
+            photoList.layoutManager = LinearLayoutManager(requireActivity())
             photoList.adapter = PhotoAdapter(it)
-
         })
     }
 

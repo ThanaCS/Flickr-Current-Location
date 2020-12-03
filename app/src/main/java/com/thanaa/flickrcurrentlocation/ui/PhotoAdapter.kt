@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.thanaa.flickrcurrentlocation.R
 import com.thanaa.flickrcurrentlocation.model.Photo
 import com.thanaa.flickrcurrentlocation.util.toUrl
@@ -39,7 +38,8 @@ class PhotoAdapter(private val photos: List<Photo>) :
 
 
         val url = toUrl(photoItem.server, photoItem.id, photoItem.secret)
-        Glide.with(holder.itemImage).load(url).apply(RequestOptions().override(1024, 1024))
+        Glide.with(holder.itemImage).load(url)
+            // .apply(RequestOptions().override(1024, 1024))
             .centerCrop().into(holder.itemImage)
 
         holder.itemView.image_view.setOnClickListener { view ->

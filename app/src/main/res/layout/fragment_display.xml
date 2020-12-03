@@ -6,13 +6,13 @@
     android:id="@+id/display_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/common_google_signin_btn_text_light_pressed"
+    android:background="@color/backgroundLight"
     tools:context=".ui.DisplayFragment">
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="25dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="44dp"
         android:background="@drawable/location_icon"
@@ -27,7 +27,6 @@
         android:paddingLeft="30dp"
         android:text="title"
         android:textSize="18sp"
-        android:textColor="@color/white"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_preview" />
@@ -58,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="52dp"
         android:text="Region"
         android:textColor="@color/greylight"
         android:textSize="12sp"
@@ -69,7 +68,7 @@
         android:id="@+id/country_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="52dp"
         android:text="country"
         android:textColor="@color/greylight"
         android:textSize="12sp"

@@ -21,7 +21,9 @@ class MapsFragment : Fragment() {
         googleMap.addMarker(
             MarkerOptions().position(place).title("Marker in ${args.location.region._content}")
         )
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place))
+
     }
 
     override fun onCreateView(
