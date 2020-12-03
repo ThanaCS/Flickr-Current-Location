@@ -16,17 +16,19 @@ class PhotoInterceptor : Interceptor {
                 .addQueryParameter("api_key", API_KEY)
                 .addQueryParameter("format", "json")
                 .addQueryParameter("nojsoncallback", "1")
-                .build()
+            .build()
         // HttpUrl.Builder creates a new Request based on the
         // original request and overwrites the original URL with the new one
         val newRequest: Request = originalRequest.newBuilder()
-                .url(newUrl)
-                .build()
+            .url(newUrl)
+            .build()
 
 
 //Finally, you call chain.proceed(newRequest) to produce a Response.
 // If you did not call chain.proceed(...), the network request would not happen.
+
         return chain.proceed(newRequest)
+
     }
 
 

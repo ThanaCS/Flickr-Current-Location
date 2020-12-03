@@ -3,30 +3,25 @@ package com.thanaa.flickrcurrentlocation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thanaa.flickrcurrentlocation.api.FlickrApi
 import com.thanaa.flickrcurrentlocation.api.FlickrService
-import com.thanaa.flickrcurrentlocation.api.PhotoInterceptor
+import com.thanaa.flickrcurrentlocation.di.DaggerApiComponent
 import com.thanaa.flickrcurrentlocation.model.Location
 import com.thanaa.flickrcurrentlocation.model.Photo
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-private const val BASE_URL = "https://api.flickr.com/"
 class FlickrViewModel : ViewModel() {
+
+    @Inject
+    lateinit var flickerService: FlickrService
+
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
 
     val photosLiveData: MutableLiveData<List<Photo>> = MutableLiveData()
     val locationLiveData: MutableLiveData<Location> = MutableLiveData()
-    val flickerService = FlickrService()
-    private val client = OkHttpClient.Builder()
-        .addInterceptor(PhotoInterceptor())
-        .build()
-    private val retrofit: FlickrApi = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)// Interceptor
-            .build().create(FlickrApi::class.java)
+
 
     // get photos near current location
     fun getPhotos(lat: String, lon: String) {
