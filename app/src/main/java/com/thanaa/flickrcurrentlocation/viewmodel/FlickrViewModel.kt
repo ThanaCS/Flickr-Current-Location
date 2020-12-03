@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thanaa.flickrcurrentlocation.api.FlickrApi
+import com.thanaa.flickrcurrentlocation.api.FlickrService
 import com.thanaa.flickrcurrentlocation.api.PhotoInterceptor
 import com.thanaa.flickrcurrentlocation.model.Location
 import com.thanaa.flickrcurrentlocation.model.Photo
@@ -17,9 +18,10 @@ class FlickrViewModel : ViewModel() {
 
     val photosLiveData: MutableLiveData<List<Photo>> = MutableLiveData()
     val locationLiveData: MutableLiveData<Location> = MutableLiveData()
+    val flickerService = FlickrService()
     private val client = OkHttpClient.Builder()
-            .addInterceptor(PhotoInterceptor())
-            .build()
+        .addInterceptor(PhotoInterceptor())
+        .build()
     private val retrofit: FlickrApi = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -27,16 +29,28 @@ class FlickrViewModel : ViewModel() {
             .build().create(FlickrApi::class.java)
 
     // get photos near current location
-    fun getPhotos(lat: String, lon: String) = viewModelScope.launch {
-        val response = retrofit.searchPhotos(lat, lon)
-        if (response.isSuccessful)
-            photosLiveData.postValue(response.body()?.photos?.photo)
+    fun getPhotos(lat: String, lon: String) {
+        try {
+            viewModelScope.launch {
+                val response = flickerService.fetchPhotosRequest(lat, lon)
+                if (response.isSuccessful)
+                    photosLiveData.postValue(response.body()?.photos?.photo)
+            }
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+        }
     }
 
     //get location of the photo
-    fun getGeoLocation(id: String) = viewModelScope.launch {
-        val response = retrofit.getGeoLocation(id)
-        if (response.isSuccessful)
-            locationLiveData.postValue(response.body()?.photo?.location)
+    fun getGeoLocation(id: String) {
+        try {
+            viewModelScope.launch {
+                val response = flickerService.fetchGeoLocation(id)
+                if (response.isSuccessful)
+                    locationLiveData.postValue(response.body()?.photo?.location)
+            }
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+        }
     }
 }
