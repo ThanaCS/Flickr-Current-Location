@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.thanaa.flickrcurrentlocation.R
 import com.thanaa.flickrcurrentlocation.model.Photo
 import com.thanaa.flickrcurrentlocation.util.toUrl
@@ -30,13 +29,13 @@ class PhotoAdapter(private val photos: List<Photo>) :
         private val viewsNumberText: TextView = view.findViewById(R.id.view_number)
         private val commentNumberText: TextView = view.findViewById(R.id.comment_number)
 
-        fun bind(url: String, views: String, comments: String) {
-            val requestOptions = RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL)
+        fun bind(holder: ViewHolder, url: String, views: String, comments: String) {
 
-            Glide.with(itemImage)
+            Glide.with(holder.itemView.context)
                 .load(url)
-                .apply(requestOptions)
-                .centerCrop().into(itemImage)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(itemImage)
 
             viewsNumberText.text = views
             commentNumberText.text = comments
@@ -88,7 +87,7 @@ class PhotoAdapter(private val photos: List<Photo>) :
         viewModel.getPhotoInfo(photoItem.id)
 
         viewModel.photoInfoLiveData.observeForever {
-            holder.bind(url, it.views, it.comments._content)
+            holder.bind(holder, url, it.views, it.comments._content)
             //TODO:removeObserver
 //            viewModel.photoInfoLiveData.removeObserver()
         }
