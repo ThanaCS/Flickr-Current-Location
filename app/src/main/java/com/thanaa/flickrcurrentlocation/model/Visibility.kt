@@ -4,6 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Country(
-    val _content: String
+data class Visibility(
+    val isfamily: Int,
+    val isfriend: Int,
+    val ispublic: Int
 ) : Parcelable

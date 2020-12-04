@@ -35,18 +35,19 @@ class PhotoAdapter(private val photos: List<Photo>) :
         viewModel = FlickrViewModel()
         val photoItem: Photo = photos[position]
         viewModel.getGeoLocation(photoItem.id)
+        viewModel.getPhotoInfo(photoItem.id)
 
 
         val url = toUrl(photoItem.server, photoItem.id, photoItem.secret)
-        Glide.with(holder.itemImage).load(url)
-            // .apply(RequestOptions().override(1024, 1024))
+        Glide.with(holder.itemImage)
+            .load(url)
             .centerCrop().into(holder.itemImage)
 
         holder.itemView.image_view.setOnClickListener { view ->
-            if (viewModel.locationLiveData.value != null) {
+            if (viewModel.locationLiveData.value != null && viewModel.photoInfoLiveData.value != null) {
                 val action = LocationFragmentDirections.actionLocationFragmentToDisplayFragment(
                     viewModel.locationLiveData.value!!,
-                    url, photoItem
+                    url, photoItem, viewModel.photoInfoLiveData.value!!
                 )
                 holder.itemView.image_view.findNavController().navigate(action)
             }

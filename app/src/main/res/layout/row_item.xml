@@ -7,6 +7,14 @@
     android:backgroundTint="@color/purple_700"
     app:cardCornerRadius="10dp">
 
+    <TextView
+        android:id="@+id/username_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="userName"
+        android:textColor="@color/white" />
+
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
@@ -31,14 +39,15 @@
         android:background="@drawable/more"
         android:padding="20dp" />
 
-    <ImageView
-        android:id="@+id/bookmark"
+    <TextView
+        android:id="@+id/comments_number"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="bottom"
         android:layout_marginLeft="34dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/bookmark"
+        android:text="100"
+        android:textColor="@color/white"
         android:padding="20dp" />
 
 </androidx.cardview.widget.CardView>

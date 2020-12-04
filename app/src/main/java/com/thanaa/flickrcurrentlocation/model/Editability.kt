@@ -4,6 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Country(
-    val _content: String
+data class Editability(
+    val canaddmeta: Int,
+    val cancomment: Int
 ) : Parcelable
