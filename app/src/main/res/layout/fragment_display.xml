@@ -28,7 +28,6 @@
             android:layout_height="wrap_content"
             android:padding="18dp"
             android:paddingLeft="30dp"
-            android:text="title"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold|italic"
@@ -41,7 +40,6 @@
             android:layout_height="wrap_content"
             android:padding="18dp"
             android:paddingLeft="30dp"
-            android:text="Description"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +51,6 @@
             android:layout_height="wrap_content"
             android:padding="18dp"
             android:paddingLeft="30dp"
-            android:text="100"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,11 +62,32 @@
             android:layout_height="wrap_content"
             android:padding="18dp"
             android:paddingLeft="30dp"
-            android:text="username"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comments_number" />
+
+        <TextView
+            android:id="@+id/date_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:paddingLeft="30dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/username_text" />
+
+        <TextView
+            android:id="@+id/views_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="18dp"
+            android:paddingLeft="30dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_text" />
 
         <ImageView
             android:id="@+id/img_preview"
@@ -115,19 +133,13 @@
             app:layout_constraintStart_toEndOf="@+id/region_text"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/comment_edit_text"
+        <ProgressBar
+            android:id="@+id/images_progress_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginTop="80dp"
-            android:background="@drawable/rounded_edittext"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:text="Comment..."
-            android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/username_text"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

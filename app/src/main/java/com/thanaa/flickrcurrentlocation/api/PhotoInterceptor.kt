@@ -22,8 +22,6 @@ class PhotoInterceptor : Interceptor {
         val newRequest: Request = originalRequest.newBuilder()
             .url(newUrl)
             .build()
-
-
 //Finally, you call chain.proceed(newRequest) to produce a Response.
 // If you did not call chain.proceed(...), the network request would not happen.
 

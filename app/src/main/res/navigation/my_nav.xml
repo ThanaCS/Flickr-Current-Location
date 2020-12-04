@@ -46,9 +46,6 @@
         <argument
             android:name="photo"
             app:argType="com.thanaa.flickrcurrentlocation.model.Photo" />
-        <argument
-            android:name="photoInfo"
-            app:argType="com.thanaa.flickrcurrentlocation.model.PhotoInfo" />
     </fragment>
     <fragment
         android:id="@+id/mapsFragment2"
@@ -65,8 +62,5 @@
         <argument
             android:name="location"
             app:argType="com.thanaa.flickrcurrentlocation.model.Location" />
-        <argument
-            android:name="photoInfo"
-            app:argType="com.thanaa.flickrcurrentlocation.model.PhotoInfo" />
     </fragment>
 </navigation>
