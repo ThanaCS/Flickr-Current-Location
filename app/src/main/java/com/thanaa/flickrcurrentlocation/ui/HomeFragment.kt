@@ -70,4 +70,5 @@ class LocationFragment : Fragment(R.layout.home_location) {
         }
     }
 
+
 }
