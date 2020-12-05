@@ -38,7 +38,6 @@ class LocationFragment : Fragment(R.layout.home_location) {
     }
 
     private fun getData() {
-
         progressBar.visibility = View.VISIBLE
         photoListRecyclerView.visibility = View.GONE
         viewModel.photosLiveData.observe(viewLifecycleOwner, {

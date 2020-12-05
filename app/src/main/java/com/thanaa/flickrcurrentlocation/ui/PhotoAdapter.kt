@@ -16,7 +16,7 @@ import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
 import kotlinx.android.synthetic.main.row_item.view.*
 
 private var TAG = "PhotoAdapter"
-var flag = false
+
 
 class PhotoAdapter(private val photos: List<Photo>) :
     RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
@@ -43,6 +43,7 @@ class PhotoAdapter(private val photos: List<Photo>) :
         }
 
         fun eyeToggle(holder: ViewHolder) {
+            var flag = false
             eyeClosedImage.setOnClickListener {
                 if (!flag) {
                     holder.eyeClosedImage.visibility = View.GONE
@@ -88,8 +89,6 @@ class PhotoAdapter(private val photos: List<Photo>) :
 
         viewModel.photoInfoLiveData.observeForever {
             holder.bind(holder, url, it.views, it.comments._content)
-            //TODO:removeObserver
-//            viewModel.photoInfoLiveData.removeObserver()
         }
         holder.eyeToggle(holder)
 
