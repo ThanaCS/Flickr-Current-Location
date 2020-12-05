@@ -16,10 +16,21 @@
         tools:layout_editor_absoluteX="-130dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@drawable/fab_ic"
+        app:layout_anchor="@+id/bottomAppBar"
+        app:layout_anchorGravity="top|center" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@android:color/transparent"
+        android:outlineProvider="none"
+        app:backgroundTint="@android:color/transparent"
         app:layout_anchor="@+id/bottomAppBar"
         app:layout_anchorGravity="top|center" />
 
