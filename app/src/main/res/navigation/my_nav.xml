@@ -38,7 +38,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_displayFragment_to_mapsFragment22"
-            app:destination="@id/mapsFragment2"
+            app:destination="@id/mapsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
@@ -48,7 +48,7 @@
             app:argType="com.thanaa.flickrcurrentlocation.model.Photo" />
     </fragment>
     <fragment
-        android:id="@+id/mapsFragment2"
+        android:id="@+id/mapsFragment"
         android:name="com.thanaa.flickrcurrentlocation.ui.MapsFragment"
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">

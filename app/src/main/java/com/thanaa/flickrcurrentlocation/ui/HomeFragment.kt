@@ -9,7 +9,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -41,7 +41,7 @@ class LocationFragment : Fragment(R.layout.home_location) {
         progressBar.visibility = View.VISIBLE
         photoListRecyclerView.visibility = View.GONE
         viewModel.photosLiveData.observe(viewLifecycleOwner, {
-            photoListRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
+            photoListRecyclerView.layoutManager = GridLayoutManager(requireActivity(), 2)
             photoListRecyclerView.adapter = PhotoAdapter(it)
             progressBar.visibility = View.GONE
             photoListRecyclerView.visibility = View.VISIBLE
