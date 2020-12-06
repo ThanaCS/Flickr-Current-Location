@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface FlickrApi {
 
     @GET("services/rest?method=flickr.photos.search")
-    suspend fun searchPhotos(
+    suspend fun getPhotos(
         @Query("lat") lat: String? = null,
         @Query("lon") lon: String? = null
     ): Response<FlickrResponse>

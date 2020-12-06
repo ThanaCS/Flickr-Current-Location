@@ -3,18 +3,18 @@ package com.thanaa.flickrcurrentlocation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thanaa.flickrcurrentlocation.api.FlickrService
 import com.thanaa.flickrcurrentlocation.di.DaggerApiComponent
 import com.thanaa.flickrcurrentlocation.model.Location
 import com.thanaa.flickrcurrentlocation.model.Photo
 import com.thanaa.flickrcurrentlocation.model.PhotoInfo
+import com.thanaa.flickrcurrentlocation.repository.FlickrRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FlickrViewModel : ViewModel() {
     @Inject
-    lateinit var flickerService: FlickrService
+    lateinit var repository: FlickrRepository
 
 
     init {
@@ -29,7 +29,7 @@ class FlickrViewModel : ViewModel() {
     fun getPhotos(lat: String, lon: String) {
         try {
             viewModelScope.launch(Dispatchers.IO) {
-                val response = flickerService.fetchPhotosRequest(lat, lon)
+                val response = repository.getPhotos(lat, lon)
                 if (response.isSuccessful)
                     photosLiveData.postValue(response.body()?.photos?.photo)
             }
@@ -41,7 +41,7 @@ class FlickrViewModel : ViewModel() {
     fun getGeoLocation(id: String) {
         try {
             viewModelScope.launch(Dispatchers.IO) {
-                val response = flickerService.fetchGeoLocation(id)
+                val response = repository.getGeoLocation(id)
                 if (response.isSuccessful)
                     locationLiveData.postValue(response.body()?.photo?.location)
             }
@@ -53,7 +53,7 @@ class FlickrViewModel : ViewModel() {
     fun getPhotoInfo(id: String) {
         try {
             viewModelScope.launch(Dispatchers.IO) {
-                val response = flickerService.getPhotoInfo(id)
+                val response = repository.getPhotoInfo(id)
                 if (response.isSuccessful)
                     photoInfoLiveData.postValue(response.body()?.photo)
             }

@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.row_item.view.*
 
 private var TAG = "PhotoAdapter"
 
-
 class PhotoAdapter(private val photos: List<Photo>) :
     RecyclerView.Adapter<PhotoAdapter.ViewHolder>() {
     lateinit var viewModel: FlickrViewModel
@@ -95,8 +94,10 @@ class PhotoAdapter(private val photos: List<Photo>) :
         //passing data to DisplayFragment and navigating
         holder.itemView.image_view.setOnClickListener { view ->
             if (viewModel.locationLiveData.value != null) {
-                val action = LocationFragmentDirections.actionLocationFragmentToDisplayFragment(
-                    viewModel.locationLiveData.value!!, url, photoItem
+                val action = HomeFragmentDirections.actionLocationFragmentToDisplayFragment(
+                    viewModel.locationLiveData.value!!,
+                    url,
+                    photoItem
                 )
                 if (viewModel.photoInfoLiveData.value?.views != null)
                     holder.itemView.image_view.findNavController().navigate(action)

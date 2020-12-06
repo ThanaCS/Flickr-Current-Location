@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/home_fragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient"
-    tools:context=".ui.LocationFragment">
+    tools:context=".ui.HomeFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/photo_list"
+        android:id="@+id/flickr_RecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

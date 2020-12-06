@@ -1,63 +1,57 @@
 package com.thanaa.flickrcurrentlocation.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.thanaa.flickrcurrentlocation.R
+import com.thanaa.flickrcurrentlocation.databinding.FragmentDisplayBinding
 import com.thanaa.flickrcurrentlocation.viewmodel.FlickrViewModel
-import kotlinx.android.synthetic.main.fragment_display.*
 
-class DisplayFragment : Fragment(R.layout.fragment_display) {
-    private lateinit var countryText: TextView
-    private lateinit var titleText: TextView
-    private lateinit var regionText: TextView
-    private lateinit var descriptionText: TextView
-    private lateinit var usernameText: TextView
-    private lateinit var commentsText: TextView
-    private lateinit var dateText: TextView
-    private lateinit var viewsText: TextView
+
+class DisplayFragment : Fragment() {
+    private var _binding: FragmentDisplayBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: FlickrViewModel
     private val args by navArgs<DisplayFragmentArgs>()
-    private lateinit var progressBar: ProgressBar
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentDisplayBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = FlickrViewModel()
 
-        countryText = view.findViewById(R.id.country_text)
-        titleText = view.findViewById(R.id.title_text)
-        regionText = view.findViewById(R.id.region_text)
-        descriptionText = view.findViewById(R.id.description_text)
-        usernameText = view.findViewById(R.id.username_text)
-        commentsText = view.findViewById(R.id.comments_number)
-        dateText = view.findViewById(R.id.date_text)
-        viewsText = view.findViewById(R.id.views_text)
-        progressBar = requireView().findViewById(R.id.images_progress_bar)
-
+        binding.displayLayout.visibility = View.GONE
         viewModel.getPhotoInfo(args.photo.id)
-        progressBar.visibility = View.VISIBLE
+
         viewModel.photoInfoLiveData.observe(viewLifecycleOwner, {
             loadImage(args.url)
-            descriptionText.text = "Description" + it.description._content
-            usernameText.text = "@" + it.owner.username
-            commentsText.text = "Comments:" + it.comments._content
-            titleText.text = "Title" + it.title._content
-            dateText.text = it.dates.taken
-            viewsText.text = "Views:" + it.views
-            countryText.text = args.location.country._content
-            regionText.text = "${args.location.region._content}, "
-            progressBar.visibility = View.GONE
+            binding.descriptionText.text = it.description._content
+            binding.usernameText.text = "@" + it.owner.username
+            binding.commentsNumber.text = it.comments._content + " comments"
+            binding.titleText.text = it.title._content
+            binding.dateText.text = it.dates.taken
+            binding.viewsText.text = it.views + " views"
+            binding.countryText.text = args.location.country._content
+            binding.regionText.text = "${args.location.region._content}, "
+            binding.displayLayout.visibility = View.VISIBLE
 
         })
 
-        location_box.setOnClickListener {
+        binding.locationBox.setOnClickListener {
             val action =
                 DisplayFragmentDirections.actionDisplayFragmentToMapsFragment22(args.location)
             findNavController().navigate(action)
@@ -69,7 +63,13 @@ class DisplayFragment : Fragment(R.layout.fragment_display) {
             .load(url)
             .apply(RequestOptions().override(900, 1024))
             .centerCrop()
-            .into(img_preview)
+            .into(binding.imgPreview)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        //to avoid memory leaks
+        _binding = null
     }
 
 

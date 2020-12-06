@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.thanaa.flickrcurrentlocation.R
@@ -19,7 +20,13 @@ class MapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         val place = LatLng(args.location.latitude.toDouble(), args.location.longitude.toDouble())
         googleMap.addMarker(
-            MarkerOptions().position(place).title(args.location.region._content)
+            MarkerOptions().position(place)
+                .title(args.location.region._content)
+                .icon(
+                    BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)
+                )
+
         )
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(place))

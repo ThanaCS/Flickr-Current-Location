@@ -23,12 +23,9 @@ class MainActivity : AppCompatActivity() {
         //made the buttons place holder for it to separate the icons and disable them
         bottomNavigationView.menu.getItem(2).isEnabled = false
         bottomNavigationView.menu.getItem(1).isEnabled = false
-
         val navController: NavController =
             Navigation.findNavController(this, R.id.fragment_container)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
-
-//        bottomNavigationView.setupWithNavController(findNavController(R.id.fragment_container))
 
     }
 

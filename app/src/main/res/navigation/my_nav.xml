@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.thanaa.flickrcurrentlocation.ui.LocationFragment"
+        android:name="com.thanaa.flickrcurrentlocation.ui.HomeFragment"
         android:label="fragment_location"
-        tools:layout="@layout/home_location">
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_locationFragment_to_displayFragment"
             app:destination="@id/displayFragment"

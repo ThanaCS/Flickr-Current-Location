@@ -3,6 +3,7 @@ package com.thanaa.flickrcurrentlocation.di
 import com.thanaa.flickrcurrentlocation.api.FlickrApi
 import com.thanaa.flickrcurrentlocation.api.FlickrService
 import com.thanaa.flickrcurrentlocation.api.PhotoInterceptor
+import com.thanaa.flickrcurrentlocation.repository.FlickrRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -34,5 +35,11 @@ class ApiModule {
     fun provideFlickrService(): FlickrService {
 
         return FlickrService()
+    }
+
+    @Provides
+    fun provideFlickrRepository(): FlickrRepository {
+
+        return FlickrRepository()
     }
 }
