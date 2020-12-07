@@ -14,7 +14,7 @@
     <color name="backgroundLight">#F5F9FD</color>
     <color name="red">#BA0101</color>
     <!--dark mode color-->
-    <color name="dark_mode_black">#212121</color>
+    <color name="dark_mode_black">#FFFFFF</color>
     <color name="dark_mode_light_black">#313131</color>
     <color name="dark_mode_light_purple">#4527a0</color>
     <color name="dark_mode_light_pink">#ad1457</color>
@@ -22,4 +22,10 @@
     <color name="dark_mode_light_green">#2e7d32</color>
     <color name="dark_mode_light_tiffany">#00695c</color>
 
+    <color name="title">#673AB7</color>
+    <color name="default_text">#000000</color>
+    <color name="brown">#FFF6FE</color>
+    <color name="purple">#FCFBFF</color>
+    <color name="card_view">#b6b2b3</color>
 </resources>
+

@@ -63,4 +63,9 @@
             android:name="location"
             app:argType="com.thanaa.flickrcurrentlocation.model.Location" />
     </fragment>
+    <fragment
+        android:id="@+id/darkModeFragment"
+        android:name="com.thanaa.flickrcurrentlocation.DarkModeFragment"
+        android:label="fragment_dark_mode"
+        tools:layout="@layout/fragment_dark_mode" />
 </navigation>

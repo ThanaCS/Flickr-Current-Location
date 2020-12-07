@@ -12,7 +12,7 @@
         android:title="   " />
 
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/darkModeFragment"
         android:icon="@drawable/settings"
         android:title="Settings" />
 </menu>
