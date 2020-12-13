@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_margin="15dp"
+    android:backgroundTint="@color/card_view"
+    app:cardCornerRadius="10dp">
+
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_gravity="top" />
+
+    <ImageView
+        android:id="@+id/comment_image"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/comment" />
+
+    <TextView
+        android:id="@+id/comment_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="8dp"
+        android:text="0"
+        android:textColor="@color/white" />
+
+    <ImageView
+        android:id="@+id/eye_open"
+        android:layout_width="28dp"
+        android:layout_height="18dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="8dp"
+        android:background="@drawable/open_eye"
+        android:padding="20dp" />
+
+    <ImageView
+        android:id="@+id/eye_close"
+        android:layout_width="26dp"
+        android:layout_height="16dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/eye_closed"
+        android:layout_margin="8dp"
+        android:visibility="gone"
+        android:padding="20dp" />
+
+    <TextView
+        android:id="@+id/view_number"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="45dp"
+        android:text="0"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/white" />
+
+
+</androidx.cardview.widget.CardView>
